@@ -5,10 +5,10 @@
   ;; org.apache.spark/spark-core_2.12 {:mvn/version "3.5.1"}
   ;;   gorillalabs/sparkling {:mvn/version "3.2.1"}
   com.taoensso/timbre {:mvn/version "6.5.0"}
-  gorillalabs/sparkling {:mvn/version "3.2.1"}
-  org.apache.spark/spark-core_2.12 {:mvn/version "3.2.1"}
-  org.apache.spark/spark-sql_2.12 {:mvn/version "3.2.1"}
-  org.apache.spark/spark-mllib_2.12 {:mvn/version "3.2.1"}
-  org.apache.hadoop/hadoop-client {:mvn/version "3.2.1"}
+  ;; gorillalabs/sparkling {:mvn/version "3.2.1"}
+  org.apache.spark/spark-core_2.12 {:mvn/version "3.5.1"}
+  org.apache.spark/spark-sql_2.12 {:mvn/version "3.5.1"}
+  org.apache.spark/spark-mllib_2.12 {:mvn/version "3.5.1"}
+  org.apache.hadoop/hadoop-client {:mvn/version "3.4.0"}
   }
  :paths ["src"]}

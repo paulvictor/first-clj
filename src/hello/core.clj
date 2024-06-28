@@ -1,27 +1,18 @@
 (ns hello.core
   (:require
+   [spark.core :as core]
+   [spark.conf :as conf]
    [clojure.string :as string]
-   [sparkling.conf :as conf]
-   [sparkling.core :as spark]
-   [taoensso.timbre :as log]
-;;    [sparkling.core as spark]
-;;    [org.apache.spark :as spark]
-;;    [org.apache.spark.api.java :as jspark]
-;;    [scala.Tuple2 :as Tuple2]
-   )
+   [taoensso.timbre :as log])
   (:gen-class))
 
-(def c (-> (conf/spark-conf)
-           (conf/master "local")
-           (conf/app-name "sparkling-example")))
-
-(def sc (spark/spark-context c))
-
-(def data (spark/parallelize sc ["a" "b" "c" "d" "e"]))
+(def local-context
+  (-> (conf/spark-conf)
+      (conf/master)
+      (conf/app-name "first")
+      ))
 
 
 (defn -main
   [& args]
-  (log/debug (str (clojure.string/upper-case "First")))
-  (log/debug (str "Hello from " (string/upper-case "clojure!!!")))
-  (spark/first data))
+  (println local-context))
