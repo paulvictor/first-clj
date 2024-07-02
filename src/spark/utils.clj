@@ -1,6 +1,7 @@
 (ns spark.utils
-  (:require [clojure.tools.logging :as log]
-            [clojure.string :as s])
+  (:require
+   [taoensso.timbre :as log]
+   [clojure.string :as s])
   (:import (org.apache.spark.rdd RDD)))
 
 (defn trace [msg]

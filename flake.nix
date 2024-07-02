@@ -20,7 +20,8 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in pkgs.mkShell {
           packages = [
-            pkgs.openjdk17_headless
+            pkgs.spark_3_5
+            pkgs.openjdk21_headless
             pkgs.jq
             pkgs.clojure
             pkgs.openjdk

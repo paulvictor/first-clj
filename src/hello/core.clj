@@ -6,13 +6,26 @@
    [taoensso.timbre :as log])
   (:gen-class))
 
-(def local-context
+(def local-conf
   (-> (conf/spark-conf)
       (conf/master)
-      (conf/app-name "first")
-      ))
-
+      (conf/app-name "first")))
 
 (defn -main
   [& args]
-  (println local-context))
+  (core/with-context ctx local-conf
+    (let [data (core/parallelize ctx (range 100))]
+      (->> data
+           (core/map inc)
+           (core/reduce +)
+           (clojure.pprint/pprint))))
+
+
+;;   (let [local-context (core/spark-context local-conf)
+;;         data (core/parallelize local-context (range 100))]
+;;     (->> data
+;;          (core/map inc)
+;;          ;; (core/reduce +)
+;;          (core/first)
+;;          (clojure.pprint/pprint)))
+  )
