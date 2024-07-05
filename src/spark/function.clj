@@ -3,6 +3,14 @@
    [ org.apache.spark.api.java.function Function]))
 
 ;; (defmacro gen-function
+;;   [clazz wrapper-name & args]
+;;   `(defn ~wrapper-name [args#]
+;;      (let [impl
+;;            (reify clazz
+;;              (call []))]
+;;        )))
+
+;; (defmacro gen-function
 ;;   [clazz wrapper-name]
 
 ;;   `(defn ~wrapper-name [f#]

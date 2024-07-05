@@ -95,17 +95,21 @@
           (call [_ x] (f x)))]
     (.map rdd impl)))
 
-;; (defn map-to-pair
-;;   "Returns a new `JavaPairRDD` of (K, V) pairs by applying `f` to all elements of `rdd`."
-;;   [f rdd]
-;;   (-> (.mapToPair rdd (pair-function f))
-;;       (u/set-auto-name (u/unmangle-fn f))))
+(defn map-to-pair
+  "Returns a new `JavaPairRDD` of (K, V) pairs by applying `f` to all elements of `rdd`."
+  [f rdd]
+  (let [impl
+        (reify PairFunction
+          (call [_ x] (f x)))]
+    (.mapToPair rdd impl)))
 
-;; (defn map-values [f rdd]
-;;   "Returns a new `JavaPairRDD` of (K,V) pairs by applying `f` to all values in the
-;;   pair-rdd `rdd`"
-;;   (-> (.mapValues rdd (function f))
-;;       (u/set-auto-name (u/unmangle-fn f))))
+(defn map-values [f rdd]
+  "Returns a new `JavaPairRDD` of (K,V) pairs by applying `f` to all values in the
+  pair-rdd `rdd`"
+  (let [impl
+        (reify Function
+          (call [_ x] (f x)))]
+    (.mapValues rdd impl)))
 
 (defn reduce
   "Aggregates the elements of `rdd` using the function `f` (which takes two arguments
@@ -122,18 +126,19 @@
   [rdd]
   (.first rdd))
 
-;; (defn values
-;;   "Returns the values of a JavaPairRDD"
-;;   [rdd]
-;;   (u/set-auto-name (.values rdd)))
+(defn values
+  "Returns the values of a JavaPairRDD"
+  [rdd]
+  (.values rdd))
 
-;; (defn flat-map
-;;   "Similar to `map`, but each input item can be mapped to 0 or more output items (so the
-;;    function `f` should return a collection rather than a single item)"
-;;   [f rdd]
-;;   (u/set-auto-name
-;;     (.flatMap rdd (flat-map-function f))
-;;     (u/unmangle-fn f)))
+(defn flat-map
+  "Similar to `map`, but each input item can be mapped to 0 or more output items (so the
+   function `f` should return a collection rather than a single item)"
+  [f rdd]
+  (let [impl
+        (reify FlatMapFunction
+          (call [_ x] (f x)))]
+    (.flatMap rdd impl)))
 
 ;; (defn flat-map-to-pair
 ;;   "Returns a new `JavaPairRDD` by first applying `f` to all elements of `rdd`, and then flattening
